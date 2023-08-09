@@ -66,7 +66,9 @@ client.on('messageCreate', async (message) => {
       .catch((error) => {
         console.log(`OPENAI ERR: ${error}`);//catches errors if any
       });
-    message.reply(result.data.choices[0].message);//reply to the message using 'result'
+    finalText = result.data.choices[0].message.content;
+    finalText = finalText.slice(0,2000);//since discord has a limit of 2k characters
+    message.reply(finalText);//reply to the message using sliced result
   } catch (error) {
     console.log(`ERR: ${error}`);//catches errors if any
   }
